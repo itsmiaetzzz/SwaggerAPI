@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: OnboardingAPI 
+  description : Learning how to describe an API
+  version: 1.2.0
+servers:
+  - url: https://std22055.com
+    description: STD server
+paths:
+  /student: 
+     get: 
+        description: get detail of the student 
+        responses: 
+          "200":
+            description: Have all the details of the student 
+            content: 
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/student"
+                examples:
+                  example1:
+                    value:
+                       - id: 1
+                         name: Mialitina
+                         birthdate: "2004-12-02"
+components:
+  schemas:
+    student:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        name: 
+          type: string
+        birthdate:
+          type: string
+      
+  
+  
+
+  
+  
