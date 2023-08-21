@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: OnboardingAPI 
   description : Learning how to describe an API
@@ -16,16 +16,135 @@ paths:
             content: 
               application/json:
                 schema:
-                  $ref: "#/components/schemas/student"
+                  $ref: "#/components/schemas/Student"
                 examples:
                   example1:
                     value:
                        - id: 1
                          name: Mialitina
                          birthdate: "2004-12-02"
+  put: 
+     tags:
+      - default
+      summary: Uptade a student 
+      requestBody: 
+        description : Update a student in school
+        content : 
+          application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+      required:  true
+    responses:
+      '200':
+        description: Successful 
+        content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+       '400':
+          description : Invalid ID supplied
+        '404':
+          description : Student not found  
+  delete: 
+     tags:
+      - default
+      summary: Delete a student 
+      requestBody: 
+        description : Delete a student in school
+      required:  true
+    responses:
+      '200':
+        description: Successful 
+        content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+       '400':
+          description : Invalid ID supplied
+  post: 
+     tags:
+      - default
+      summary: Add a new  student 
+      requestBody: 
+        description : Adding a student in school
+      required:  true
+      content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+      required : true 
+    responses:
+      '200':
+        description: Successful 
+        content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+        '405':
+          description: Invalid input
+ /teacher: 
+     get: 
+        description: get detail of the teacher 
+        responses: 
+          "200":
+            description: Have all the details of the teacher 
+            content: 
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Teacher"
+                examples:
+                  example1:
+                    value:
+                       - id: 1
+                         name: Andy
+                         courseName:  Web2   
+                         courseCode: REACT
+                      courseDuration : 2 
+post: 
+     tags:
+      - default
+      summary: Add a new  teacher 
+      requestBody: 
+        description : Adding a teacher  in school
+      required:  true
+      content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Teacher'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Teacher'
+      required : true 
+    responses:
+      '200':
+        description: Successful 
+        content:
+         application/json: 
+            schema: 
+                $ref: '#/components/schemas/Student'
+          application/xml:
+            schema: 
+                 $href: '#/components/schemas/Student'
+        '405':
+          description: Inavalid input    
 components:
   schemas:
-    student:
+    Student:
       type: object
       properties: 
         id: 
@@ -34,7 +153,30 @@ components:
           type: string
         birthdate:
           type: string
-      
+    Teacher: 
+      type : object
+      properties:
+        id:
+          type: integer 
+        name:
+          type: string
+        course:
+          type: array 
+          items:
+            types: object 
+            properties: 
+              courseName: 
+                type: string
+                example : Web2 
+              courseCode: 
+                type: string
+                example: REACT
+              courseDuration : 
+                type : integer
+                example: 2
+
+
+
   
   
 
